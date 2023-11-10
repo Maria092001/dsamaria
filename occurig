@@ -1,0 +1,62 @@
+Given a string str of lowercase alphabets. The task is to find the maximum occurring character in the string str. If more than one character occurs the maximum number of time then print the lexicographically smaller character.
+
+Example 1:
+
+Input:
+str = testsample
+Output: e
+Explanation: e is the character which
+is having the highest frequency.
+
+The idea is to iterate through the string and create a hashmap where the keys are the characters in the string, and the values are the number of times that character occurs. 
+Then, we can iterate through the hashmap to find the character with the highest value.
+
+Implementation
+Declare a vector of size 26 hash to store the the count of each character and initialize it with 0.
+Traverse the string and update the count of each character in the hash.
+Now iterate over the hash table.
+We keep storing the maximum value in hash table and its corresponding character.
+Return the character with maximum occurrences.
+
+This algorithm first counts the occurrences of each character in the string using a hashmap.
+Then, it finds the character with the maximum count by iterating through the key-value pairs in the hashmap and keeping track of the maximum count and corresponding character. 
+Finally, it returns the character with the maximum count.
+
+
+class Solution
+{
+    //Function to find the maximum occurring character in a string.
+    public static char getMaxOccuringChar(String line)
+    {
+        StringBuffer sb=new StringBuffer();
+        char[] s=line.toCharArray();
+	     int[] arr=new int[26];
+	     int max=-1;
+	     char result='\u0000';
+	     
+	     //using hash table to store count of each character.
+	     for(int i=0;i<s.length;i++)
+	     {
+	         char c=s[i];
+	         if(c!=' ')
+	         {
+	             arr[c-'a']++;
+	         }
+	     }
+	     
+	     //iterating over the hash table.
+	     for(int i=0;i<arr.length;i++)
+	     {
+	         //we keep storing the maximum value in hash 
+             //table and its corresponding character.
+	         if(arr[i]>max)
+	         {
+	             max=arr[i];
+	             result=(char)(i+'a');
+	         }
+	     }
+	     //returning the character with maximum occurrences.
+	     return result;
+    }
+    
+}
