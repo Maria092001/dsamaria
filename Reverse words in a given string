@@ -1,0 +1,48 @@
+Given a String S, reverse the string without reversing its individual words. Words are separated by dots.
+
+Example 1:
+
+Input:
+S = i.like.this.program.very.much
+Output: much.very.program.this.like.i
+Explanation: After reversing the whole
+string(not individual words), the input
+string becomes
+much.very.program.this.like.i
+
+The idea is to traverse the string and push the current word into the vector and then traverse the vector from the end and add each word into the resulting string.
+
+Implementation
+Initialize two string result and current_word and one vector as words
+Run a loop from i =  0 to less than string length
+If current character is dot(.), then push the current_word into the vector and update current_word as empty string
+Else add each character into the current_word,
+Now traverse the vector from the end
+Add each word into the result, also add dot(.) till i not equal to 0
+Return result.
+
+Complexity
+Time complexity: O(N),  since we traverse the string once
+Auxiliary Space: O(N), we take an result string and a vector, where N is the length of the string
+
+class Solution 
+{
+    //Function to reverse words in a given string.
+    String reverseWords(String s)
+    {
+        //initially reversing individual words of the given 
+        //string one by one and storing it in a list.
+        String words[] = s.split("\\.");
+        String result = "";
+
+        //now reversing the whole modified string by adding all 
+        //the elements of list in a single string in reverse order.
+        for (int i = words.length - 1; i >= 0; i--) {
+            result += words[i];
+            if(i!=0)
+                result += '.';
+        }
+        //returning the result.
+        return result;
+    }
+}
