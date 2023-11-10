@@ -1,0 +1,49 @@
+Anagram of String
+
+Given two strings S1 and S2 in lowercase, the task is to make them anagram. The only allowed operation is to remove a character from any string. 
+Find the minimum number of characters to be deleted to make both the strings anagram.
+Two strings are called anagram of each other if one of them can be converted into another by rearranging its letters.
+
+Example 1:
+
+Input:
+S1 = bcadeh
+S2 = hea
+Output: 3
+Explanation: We need to remove b, c
+and d from S1.
+
+The idea is to make character count arrays for both the strings and store frequency of each character. 
+Now iterate the count arrays of both strings and difference in frequency of any character abs(count1[str1[i]-‘a’] – count2[str2[i]-‘a’]) in both the strings is the number of character to be removed in either string.  
+
+// Java implementation to count number of deletions 
+// required from two strings to create an anagram 
+
+class GFG { 
+
+	final static int CHARS = 26; 
+
+	static int countDeletions(String str1, String str2) { 
+		int arr[] = new int[CHARS]; 
+		for (int i = 0; i < str1.length(); i++) { 
+			arr[str1.charAt(i) - 'a']++; 
+		} 
+
+		for (int i = 0; i < str2.length(); i++) { 
+			arr[str2.charAt(i) - 'a']--; 
+		} 
+
+		int ans = 0; 
+		for (int i = 0; i < CHARS; i++) { 
+			ans += Math.abs(arr[i]); 
+		} 
+		return ans; 
+	} 
+
+	static public void main(String[] args) { 
+		String str1 = "bcadeh", str2 = "hea"; 
+		System.out.println(countDeletions(str1, str2)); 
+	} 
+} 
+
+
