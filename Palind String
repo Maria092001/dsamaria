@@ -1,0 +1,27 @@
+Given a string S, check if it is palindrome or not.
+
+Example 1:
+
+Input: S = "abba"
+Output: 1
+Explanation: S is a palindrome
+
+Expected Approach
+Intuition
+Traverse through half of the string and for every index check that if ith and n-ith characters are same or not.
+
+Run a loop  that iterates over the first half of the filtered string.
+s[i] != s[len(s) - i - 1], 
+This line compares the characters at the i-th position and the corresponding position from the end of the string. If they are not equal, it means the string is not a palindrome.
+If the loop completes without finding any unequal characters, the function returns True, indicating that the string is a palindrome.
+
+class Solution {
+    int isPalindrome(String S) {
+        // code here
+        for(int i = 0; i < S.length()/2; i++)
+			if(S.charAt(i) != S.charAt(S.length() - i - 1))
+				return 0;
+
+		return 1;
+    }
+};
