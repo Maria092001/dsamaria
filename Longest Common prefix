@@ -1,0 +1,124 @@
+Given an array of N strings, find the longest common prefix among all strings present in the array.
+
+
+Example 1:
+
+Input:
+N = 4
+arr[] = {geeksforgeeks, geeks, geek,
+         geezer}
+Output: gee
+Explanation: "gee" is the longest common
+prefix in all the given strings.
+
+class GFG {
+
+// A Utility Function to find the common prefix between 
+// strings- str1 and str2 
+    static String commonPrefixUtil(String str1, String str2) {
+        String result = "";
+        int n1 = str1.length(), n2 = str2.length();
+
+        // Compare str1 and str2 
+        for (int i = 0, j = 0; i <= n1 - 1 && j <= n2 - 1; i++, j++) {
+            if (str1.charAt(i) != str2.charAt(j)) {
+                break;
+            }
+            result += str1.charAt(i);
+        }
+
+        return (result);
+    }
+
+// A Function that returns the longest common prefix 
+// from the array of strings 
+    static String commonPrefix(String arr[], int n) {
+        String prefix = arr[0];
+
+        for (int i = 1; i <= n - 1; i++) {
+            prefix = commonPrefixUtil(prefix, arr[i]);
+        }
+
+        return (prefix);
+    }
+
+// Driver program to test above function 
+    public static void main(String[] args) {
+        String arr[] = {"geeksforgeeks", "geeks",
+            "geek", "geezer"};
+        int n = arr.length;
+
+        String ans = commonPrefix(arr, n);
+
+        if (ans.length() > 0) {
+            System.out.printf("The longest common prefix is - %s",
+                    ans);
+        } else {
+            System.out.printf("There is no common prefix");
+        }
+    }
+}
+// This code is contributed by 29AjayKumar
+
+Output
+The longest common prefix is - gee
+Time Complexity : Since we are iterating through all the strings and for each string we are iterating though each characters, so we can say that the time complexity is O(N*M) where, 
+
+N = Number of strings
+M = Length of the largest string
+Auxiliary Space : To store the longest prefix string we are allocating space which is O(M).
+
+
+IMPROVEEE
+
+import java.util.Arrays;
+ 
+public class Main {
+    public static String longestCommonPrefix(String[] arr) {
+        // Check if the input list is empty
+        if (arr == null || arr.length == 0) {
+            // If the list is empty, return an empty string
+            return "";
+        }
+ 
+        // Sort the input list of strings
+        Arrays.sort(arr);
+ 
+        // Initialize the prefix to an empty string
+        StringBuilder prefix = new StringBuilder();
+ 
+        // Loop through the first string of the sorted list
+        for (int i = 0; i < arr[0].length(); i++) {
+            // Check if the current character is the same in all strings in the list
+            boolean match = true;
+            for (int j = 1; j < arr.length; j++) {
+                if (arr[j].length() <= i || arr[j].charAt(i) != arr[0].charAt(i)) {
+                    match = false;
+                    break;
+                }
+            }
+ 
+            // If the current character is the same in all strings, add it to the prefix
+            if (match) {
+                prefix.append(arr[0].charAt(i));
+            } else {
+                // If the current character is not the same in all strings, break the loop
+                break;
+            }
+        }
+ 
+        // Return the prefix
+        return prefix.toString();
+    }
+ 
+    public static void main(String[] args) {
+        // A sample list of strings
+        String[] arr = { "geeksforgeeks", "geeks", "geek", "geezer" };
+        // Print the longest common prefix
+        System.out.println("The longest common prefix is: " + longestCommonPrefix(arr));
+    }
+}
+
+Output
+The longest common prefix is:  gee
+Time complexity: O(NMlogM)
